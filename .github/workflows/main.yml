@@ -1,0 +1,23 @@
+name: Keep Aternos Server Alive
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Har 5 minute me server ko ping kare
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    
+    - name: Install Requests
+      run: pip install requests
+    
+    - name: Run Server Pinger
+      run: python server_pinger.py
